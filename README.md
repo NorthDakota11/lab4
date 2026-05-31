@@ -1,20 +1,19 @@
 # lab04
 
-Continuous integration laboratory work for a CMake C++ project.
+Лабораторная работа №4 посвящена настройке непрерывной интеграции для CMake-проекта.
 
-The task is based on `tp-labs/lab04`. The original lab asks to configure CI for the CMake project from lab03: Travis CI on Linux with gcc and clang, and AppVeyor on Windows.
+В качестве основы используется проект из lab03: статическая библиотека `print` и CMake-сборка.
 
-## Project
+## Состав проекта
 
-This repository contains the `print` static library from lab03:
+- `CMakeLists.txt` — сборка библиотеки `print` и установка через цель `install`.
+- `include/print.hpp` — заголовочный файл библиотеки.
+- `sources/print.cpp` — реализация библиотеки.
+- `.travis.yml` — конфигурация Travis CI.
+- `appveyor.yml` — конфигурация AppVeyor.
+- `REPORT.md` — отчет по лабораторной работе.
 
-- `include/print.hpp` - public header
-- `sources/print.cpp` - implementation
-- `CMakeLists.txt` - build and install rules
-- `.travis.yml` - Travis CI configuration placeholder
-- `appveyor.yml` - AppVeyor configuration placeholder
-
-## Local build
+## Локальная сборка
 
 ```sh
 cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install
@@ -22,35 +21,14 @@ cmake --build _build
 cmake --build _build --target install
 ```
 
-## Required Travis CI configuration
+## Travis CI
 
-Use this full `.travis.yml` content if editing manually:
+Travis CI должен собирать проект на Linux. По заданию используются компиляторы `gcc` и `clang`.
 
-```yaml
-language: cpp
+## AppVeyor
 
-os: linux
-dist: focal
+AppVeyor используется для проверки сборки на Windows.
 
-compiler:
-  - gcc
-  - clang
+## Ссылка на репозиторий
 
-script:
-  - cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install
-  - cmake --build _build
-  - cmake --build _build --target install
-```
-
-## Required AppVeyor configuration
-
-Use this full `appveyor.yml` content if editing manually:
-
-```yaml
-image: Visual Studio 2019
-
-build_script:
-  - cmake -S . -B _build -DCMAKE_INSTALL_PREFIX=_install
-  - cmake --build _build --config Release
-  - cmake --build _build --config Release --target install
-```
+https://github.com/NorthDakota11/lab4
