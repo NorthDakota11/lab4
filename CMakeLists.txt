@@ -15,9 +15,9 @@ add_library(solver_lib STATIC solver_lib/calc.cc)
 target_include_directories(solver_lib PUBLIC solver_lib)
 
 add_executable(hello_world hello_world_application/run.cc)
-add_executable(solver solver_application/app.cc)
-
 target_link_libraries(hello_world formatter_ex)
+
+add_executable(solver solver_application/app.cc)
 target_link_libraries(solver solver_lib formatter_ex)
 
 install(TARGETS formatter formatter_ex solver_lib hello_world solver
